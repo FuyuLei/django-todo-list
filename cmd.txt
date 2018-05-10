@@ -1,0 +1,8 @@
+python -m venv env  ----建立虛擬環境
+.\env\Scripts\activate.bat  ----進入虛擬環境
+deactivate  ----退出虛擬環境
+django-admin.py starproject core.
+pip install django
+python manage.py makemigrations  ----建表
+python manage.py createsuperuser  ----建立使用者
+python manage.py runserver  ----跑server
