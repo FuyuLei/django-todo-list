@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <h1>TODO LIST</h1>
+            <hr>
+            <div class="list-group">
+                {% for todo in todos %}
+                    <a href="#" class="list-group-item list-group-item-action">{{ todo.title }}</a>
+                {% empty %}
+                    <a href="#" class="list-group-item list-group-item-action">No Todo</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
