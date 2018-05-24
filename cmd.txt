@@ -11,11 +11,13 @@ python manage.py makemigrations  ----建表
 python manage.py createsuperuser  ----建立使用者
 python manage.py runserver  ----跑server
 
+
 資料夾下的env資料夾就是虛擬環境內的東西
 
-bootstrap4第三方套件
+bootstrap4第三方套件:
 https://github.com/zostera/django-bootstrap4
 
+pip install django-bootstrap4
 -----------------------------------------快速鍵(?
 div.class名稱(例如:list-group) ---> 按tab
 就會出現<div class="list-group"></div>
@@ -25,3 +27,8 @@ block ---> 按tab 出現
 
 for ---> 按tab 出現
     {% for todo in todos %}{% endfor %}
+
+
+----------------------------------------------0524
+pip install djangorestframework
+python manage.py startapp api
