@@ -5,11 +5,12 @@
 {% block body %}
     <div class="row">
         <div class="col-6 offset-3">
-            <h1>New Todo</h1>
+            <h1>Register</h1>
             <hr>
             <form action="" method="post" class="form">
                 {% csrf_token %}
                 {% bootstrap_form form %}
+                <a href="{% url 'login' %}" class="mb-2">Already have account?</a>
                 {% buttons %}
                     <button type="submit" class="btn btn-primary">
                         Submit

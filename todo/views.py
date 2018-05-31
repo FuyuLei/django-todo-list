@@ -1,5 +1,6 @@
 from django.http import HttpResponseNotAllowed, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from .models import Todo
 from .forms import TodoModelFrom, DeleteConfirmForm
@@ -17,6 +18,7 @@ def show(request, pk):
     })
 
 
+@login_required
 def new(request):
     form = TodoModelFrom(request.POST or None)
     if form.is_valid():
@@ -26,6 +28,7 @@ def new(request):
     return render(request, 'todo/new.html', {'form': form})
 
 
+@login_required
 def edit(request, pk):
     todo = get_object_or_404(Todo, pk=pk)
     form = TodoModelFrom(request.POST or None, instance=todo)
@@ -39,6 +42,7 @@ def edit(request, pk):
     })
 
 
+@login_required
 def delete(request, pk):
     form = DeleteConfirmForm(request.POST or None)
     if form.is_valid() and form.cleaned_data['check']:
