@@ -22,7 +22,9 @@ def show(request, pk):
 def new(request):
     form = TodoModelFrom(request.POST or None)
     if form.is_valid():
-        form.save()
+        todo = form.save(commit=False)
+        todo.creator = request.user
+        todo.save()  # write db
         return redirect('todo:index')
 
     return render(request, 'todo/new.html', {'form': form})
@@ -34,7 +36,9 @@ def edit(request, pk):
     form = TodoModelFrom(request.POST or None, instance=todo)
 
     if form.is_valid():
-        form.save()
+        todo = form.save(commit=False)
+        todo.creator = request.user
+        todo.save()  # write db
         return redirect('todo:index')
 
     return render(request, 'todo/edit.html', {

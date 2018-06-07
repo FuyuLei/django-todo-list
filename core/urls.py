@@ -19,7 +19,6 @@ from django.contrib.auth import views as auth_views
 
 from users.views import register
 
-
 urlpatterns = [
     path('api/', include('api.urls')),
     path('todo/', include('todo.urls')),
@@ -28,4 +27,23 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('register/', register, name='register'),
+
+    # Add
+    path('password-reset/',
+         auth_views.PasswordResetView.as_view(
+             template_name='users/password_reset.html',
+             subject_template_name='users/password_reset_subject.txt',
+             email_template_name='users/password_reset_email.html',
+             html_email_template_name='users/password_reset_html_email.html',
+             success_url='/todo/'
+         ),
+         name='password_reset'),
+
+    path('password-reset-confirm/<uidb64>/<token>/',
+         auth_views.PasswordResetConfirmView.as_view(
+             template_name='users/password_reset_confirm.html',
+             post_reset_login=True,
+             success_url='/todo/'
+         ),
+         name='password_reset_confirm'),
 ]

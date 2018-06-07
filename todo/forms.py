@@ -7,6 +7,7 @@ class TodoModelFrom(ModelForm):
     class Meta:
         model = Todo
         fields = '__all__'
+        exclude = ['creator']
 
 
 class DeleteConfirmForm(Form):
