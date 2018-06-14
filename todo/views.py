@@ -20,11 +20,9 @@ def show(request, pk):
 
 @login_required
 def new(request):
-    form = TodoModelFrom(request.POST or None)
+    form = TodoModelFrom(request.POST or None, request.FILES or None)
     if form.is_valid():
-        todo = form.save(commit=False)
-        todo.creator = request.user
-        todo.save()  # write db
+        todo = form.save(request.user)
         return redirect('todo:index')
 
     return render(request, 'todo/new.html', {'form': form})
@@ -33,12 +31,9 @@ def new(request):
 @login_required
 def edit(request, pk):
     todo = get_object_or_404(Todo, pk=pk)
-    form = TodoModelFrom(request.POST or None, instance=todo)
-
+    form = TodoModelFrom(request.POST or None, request.FILES or None, instance=todo)
     if form.is_valid():
-        todo = form.save(commit=False)
-        todo.creator = request.user
-        todo.save()  # write db
+        todo = form.save(request.user)
         return redirect('todo:index')
 
     return render(request, 'todo/edit.html', {
